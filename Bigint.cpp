@@ -638,6 +638,27 @@ bool Bigint::check_div(const string &a, const string &b, const int &l_pos, const
     return true;
 }
 
+bool Bigint::operator<=(const Bigint &p) const {
+    int ans = compare_with((*this), p);
+    if (ans == SMALLER||ans==EQUAL)
+        return true;
+    else return false;
+}
+
+bool Bigint::operator>(const Bigint &p) const {
+    int ans = compare_with((*this), p);
+    if (ans == LARGER)
+        return true;
+    else return false;
+}
+
+bool Bigint::operator>=(const Bigint &p) const {
+    int ans = compare_with((*this), p);
+    if (ans == LARGER||ans==EQUAL)
+        return true;
+    else return false;
+}
+
 Bigint pow(const Bigint &x, const long long &n) {
     Bigint ans = Bigint(x);
 

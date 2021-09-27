@@ -54,6 +54,9 @@ public:
 
 
     bool operator<(const Bigint &p) const;
+    bool operator<=(const Bigint &p) const;
+    bool operator>(const Bigint &p) const;
+    bool operator>=(const Bigint &p) const;
     bool operator==(const Bigint &p)const;
 
     ~Bigint();
