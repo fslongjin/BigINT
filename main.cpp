@@ -16,6 +16,7 @@ int main() {
         cout<<tmp<<"/"<<tmp2<<"="<<tmp/tmp2<<endl;
         cout<<"pow("<<tmp<<", 2) = "<<pow(tmp, 2)<<endl;
         cout<<"pow("<<tmp<<", 3) = "<<pow(tmp, 3)<<endl;
+        cout<<"qpow("<<tmp<<", 3) = "<<qpow(tmp, 3)<<endl;
 
     }
 

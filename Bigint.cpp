@@ -2,7 +2,7 @@
 // Created by longjin on 2021/9/25.
 //
 
-#pragma GCC optimize("O3")
+//#pragma GCC optimize("O2")
 
 #include "Bigint.h"
 #include<iostream>
@@ -27,17 +27,19 @@ Bigint::Bigint(long long x) {
     this->end = this->begin;
 
     //防止由于x为0而造成异常
-    this->begin->num = 0;
-
-    this->translate_num2BigInt(x);
+    if (x == 0)
+        this->begin->num = 0;
+    else
+        this->translate_num2BigInt(x);
 
 }
 
 Bigint::Bigint(std::string x) {
     this->begin = new node();
     this->end = this->begin;
+
     //防止由于x为0而造成异常
-    this->begin->num = 0;
+    //this->begin->num = 0;
     this->translate_string2BigInt(x);
 }
 
@@ -509,11 +511,11 @@ int Bigint::compare_with(const Bigint &a, const Bigint &p) {
     }
 
     //相等
-    if (nd == nullptr && ndp == nullptr)
+    if (nd == a.end && ndp == p.end)
         return EQUAL;
     else {
         //不应该到达这里
-        throw "At Compare: final pointer is not a nullptr";
+        throw invalid_argument("At Compare: final pointer is not a nullptr");
     }
 }
 
@@ -640,7 +642,7 @@ bool Bigint::check_div(const string &a, const string &b, const int &l_pos, const
 
 bool Bigint::operator<=(const Bigint &p) const {
     int ans = compare_with((*this), p);
-    if (ans == SMALLER||ans==EQUAL)
+    if (ans == SMALLER || ans == EQUAL)
         return true;
     else return false;
 }
@@ -654,17 +656,30 @@ bool Bigint::operator>(const Bigint &p) const {
 
 bool Bigint::operator>=(const Bigint &p) const {
     int ans = compare_with((*this), p);
-    if (ans == LARGER||ans==EQUAL)
+    if (ans == LARGER || ans == EQUAL)
         return true;
     else return false;
 }
 
-Bigint pow(const Bigint &x, const long long &n) {
+Bigint pow(const Bigint &x, const Bigint n) {
     Bigint ans = Bigint(x);
 
-    for(long long i=1;i<n;++i)
-    {
-        ans = ans*x;
+    for (Bigint i = Bigint(1); i < n; i = i + 1) {
+        ans = ans * x;
     }
     return ans;
+}
+
+Bigint qpow(const Bigint &x, long long n) {
+    Bigint ans = Bigint(1);
+    Bigint xx = Bigint(x);
+
+    while (n) {
+        if (n & 1)
+            ans = ans * xx;
+        xx = xx * xx;
+        n >>= 1;
+    }
+    return ans;
+
 }

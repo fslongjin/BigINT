@@ -1,7 +1,7 @@
 //
 // Created by longjin on 2021/9/25.
 //
-#pragma GCC optimize("O3")
+//#pragma GCC optimize("O2")
 
 #ifndef INC_BIGINT_BIGINT_H
 #define INC_BIGINT_BIGINT_H
@@ -99,7 +99,10 @@ private:
 };
 
 //乘方
-Bigint pow(const Bigint& x, const long long& n);
+Bigint pow(const Bigint& x, const Bigint n);
+//快速幂
+
+Bigint qpow(const Bigint &x, long long n);
 
 
 #endif //INC_BIGINT_BIGINT_H
